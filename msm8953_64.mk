@@ -40,7 +40,9 @@ PRODUCT_COPY_FILES += \
     device/qcom/msm8953_32/media/media_profiles_8953.xml:system/etc/media_profiles.xml \
     device/qcom/msm8953_32/media/media_profiles_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml \
     device/qcom/msm8953_32/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    device/qcom/msm8953_32/media/media_codecs_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_8953.xml \
     device/qcom/msm8953_32/media/media_codecs_performance_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    device/qcom/msm8953_32/media/media_codecs_performance_8953.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_8953.xml \
     device/qcom/msm8953_32/media/media_profiles_8953_v1.xml:system/etc/media_profiles_8953_v1.xml \
     device/qcom/msm8953_32/media/media_profiles_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_8953_v1.xml \
     device/qcom/msm8953_32/media/media_codecs_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_8953_v1.xml \
@@ -264,6 +266,10 @@ PRODUCT_PACKAGES += \
 
 #Enable Lights Impl HAL Compilation
 PRODUCT_PACKAGES += android.hardware.light@2.0-impl
+
+#Thermal
+PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
+                    android.hardware.thermal@1.0-service
 
 #set KMGK_USE_QTI_SERVICE to true to enable QTI KEYMASTER and GATEKEEPER HIDLs
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
