@@ -29,4 +29,8 @@
          increase the rate of unintentional unlocks. -->
     <bool name="config_lockscreenAntiFalsingClassifierEnabled">false</bool>
 
+    <!-- Control whether status bar should distinguish HSPA data icon from UMTS
+    data icon on devices -->
+    <bool name="config_hspa_data_distinguishable">true</bool>
+
 </resources>
