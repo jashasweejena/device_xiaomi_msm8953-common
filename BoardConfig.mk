@@ -145,7 +145,9 @@ BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/audio_digital_cdc.ko \
     $(KERNEL_MODULES_OUT)/audio_analog_cdc.ko \
     $(KERNEL_MODULES_OUT)/audio_native.ko \
-    $(KERNEL_MODULES_OUT)/audio_machine_sdm450.ko
+    $(KERNEL_MODULES_OUT)/audio_machine_sdm450.ko \
+    $(KERNEL_MODULES_OUT)/audio_machine_ext_sdm450.ko
+
 endif
 
 ifeq ($(strip $(TARGET_KERNEL_VERSION)), 4.9)
@@ -219,3 +221,7 @@ endif
 FEATURE_QCRIL_UIM_SAP_SERVER_MODE := true
 
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm
+
+ifeq ($(strip $(TARGET_KERNEL_VERSION)), 4.9)
+PMIC_QG_SUPPORT := true
+endif
