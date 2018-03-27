@@ -324,4 +324,7 @@
 
     <!-- Should the pinner service pin the Camera application? -->
     <bool name="config_pinnerCameraApp">true</bool>
+
+    <integer name="config_deviceHardwareKeys">19</integer>
+
 </resources>
