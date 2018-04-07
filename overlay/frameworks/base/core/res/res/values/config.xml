@@ -324,4 +324,8 @@
 
     <!-- Should the pinner service pin the Camera application? -->
     <bool name="config_pinnerCameraApp">true</bool>
+
+    <bool name="config_useRoundIcon">true</bool>
+    <string name="config_icon_mask" translatable="false">"M50 0A50 50,0,1,1,50 100A50 50,0,1,1,50 0"</string>
+
 </resources>
