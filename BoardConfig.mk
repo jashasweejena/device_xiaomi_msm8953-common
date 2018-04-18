@@ -64,18 +64,36 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_msm
 endif
 
-ifeq ($(ENABLE_AB),true)
-  ifeq ($(ENABLE_VENDOR_IMAGE), true)
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/recovery_AB_split_variant.fstab
-  else
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/recovery_AB_non-split_variant.fstab
-  endif
+ifneq ($(wildcard kernel/msm-3.18),)
+    ifeq ($(ENABLE_AB),true)
+      ifeq ($(ENABLE_VENDOR_IMAGE), true)
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-3.18/recovery_AB_split_variant.fstab
+      else
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-3.18/recovery_AB_non-split_variant.fstab
+      endif
+    else
+      ifeq ($(ENABLE_VENDOR_IMAGE), true)
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-3.18/recovery_non-AB_split_variant.fstab
+      else
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-3.18/recovery_non-AB_non-split_variant.fstab
+      endif
+    endif
+else ifneq ($(wildcard kernel/msm-4.9),)
+    ifeq ($(ENABLE_AB),true)
+      ifeq ($(ENABLE_VENDOR_IMAGE), true)
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-4.9/recovery_AB_split_variant.fstab
+      else
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-4.9/recovery_AB_non-split_variant.fstab
+      endif
+    else
+      ifeq ($(ENABLE_VENDOR_IMAGE), true)
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-4.9/recovery_non-AB_split_variant.fstab
+      else
+        TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/fstabs-4.9/recovery_non-AB_non-split_variant.fstab
+      endif
+    endif
 else
-  ifeq ($(ENABLE_VENDOR_IMAGE), true)
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/recovery_non-AB_split_variant.fstab
-  else
-    TARGET_RECOVERY_FSTAB := device/qcom/msm8953_64/recovery_non-AB_non-split_variant.fstab
-  endif
+    $(warning "Unknown kernel")
 endif
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -86,6 +104,9 @@ BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_OEMIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+ifeq ($(TARGET_KERNEL_VERSION), 4.9)
+BOARD_DTBOIMG_PARTITION_SIZE := 0x0800000
+endif
 
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
@@ -136,6 +157,7 @@ BOARD_VENDOR_KERNEL_MODULES := \
     $(KERNEL_MODULES_OUT)/audio_wsa881x.ko \
     $(KERNEL_MODULES_OUT)/audio_wsa881x_analog.ko \
     $(KERNEL_MODULES_OUT)/audio_platform.ko \
+    $(KERNEL_MODULES_OUT)/audio_cpe_lsm.ko \
     $(KERNEL_MODULES_OUT)/audio_hdmi.ko \
     $(KERNEL_MODULES_OUT)/audio_stub.ko \
     $(KERNEL_MODULES_OUT)/audio_wcd9xxx.ko \
@@ -224,4 +246,9 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.msm
 
 ifeq ($(strip $(TARGET_KERNEL_VERSION)), 4.9)
 PMIC_QG_SUPPORT := true
+endif
+
+#Generate DTBO image
+ifeq ($(TARGET_KERNEL_VERSION), 4.9)
+BOARD_KERNEL_SEPARATED_DTBO := true
 endif
