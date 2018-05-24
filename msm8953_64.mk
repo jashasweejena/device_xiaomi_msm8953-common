@@ -284,6 +284,9 @@ PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
 
 TARGET_SUPPORT_SOTER := true
 
+#Property to enable IO cgroups
+PRODUCT_PROPERTY_OVERRIDES += ro.vendor.iocgrp.config=1
+
 #set KMGK_USE_QTI_SERVICE to true to enable QTI KEYMASTER and GATEKEEPER HIDLs
 ifeq ($(ENABLE_VENDOR_IMAGE), true)
 KMGK_USE_QTI_SERVICE := true
