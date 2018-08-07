@@ -193,10 +193,10 @@ TARGET_USES_INTERACTION_BOOST := true
 
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USE_SDCLANG := true
+#TARGET_USE_SDCLANG := false
 
 # RIL
-#TARGET_RIL_VARIANT := caf
+TARGET_RIL_VARIANT := caf
 
 # Recovery
 ifeq ($(AB_OTA_UPDATER), true)
