@@ -151,8 +151,8 @@
     <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
     <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
     <integer-array translatable="false" name="config_tether_upstream_types">
-        <item>0</item>
         <item>1</item>
+        <item>0</item>
         <item>4</item>
         <item>5</item>
         <item>7</item>
@@ -324,4 +324,8 @@
 
     <!-- Should the pinner service pin the Camera application? -->
     <bool name="config_pinnerCameraApp">true</bool>
+
+    <bool name="config_useRoundIcon">true</bool>
+    <string name="config_icon_mask" translatable="false">"M50 0A50 50,0,1,1,50 100A50 50,0,1,1,50 0"</string>
+
 </resources>
